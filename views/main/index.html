@@ -77,12 +77,20 @@
 			<!--右边内容-->
 			<div class="mainRight">
 				<!--登录成功后现实的内容-->
-				<div class="rightBox" style="display: none;" id="loginSuccess">
+				{% if userInfo._id %}
+				<div class="rightBox">
 					<div class="title"><span>用户信息</span></div>
-					<p><span class="colDark" id="_username">admin</span></p>
-					<p id="isAdmin"><span class="colDanger">你好！欢迎光临我的博客</span></p>
+					<p><span class="colDark" id="_username">{{userInfo.username}}</span></p>
+					
+					<!--根据不同的用户类型显示不同的用户信息-->
+					{% if userInfo.isAdmin %}
+					<p><span class="colDanger">你好！管理员，<a href="/admin">你可以点击这里进入管理</a></span></p>
+					{% else %}
+					<p><span class="colDanger">你好！欢迎光临我的博客</span></p>
+					{% endif %}
 					<p><span class="colDark"><a href="javascript:void(0);" id="logoutBtn">退出</a></span></p>
 				</div>
+				{% else %}
 				
 				<!--登录模块-->
 				<div class="rightBox" id="loginBox">
@@ -104,6 +112,8 @@
 					<p class="textRigth">已有账号？<a href="javascript:void(0);" class="colMint">马上登录</a></p>
 					<p class="colWarning textCenter"></p>
 				</div>
+				{% endif %}
+				
 				<!--社区模块-->
 				<div class="rightBox">
 					<div class="title"><span>社区</span></div>
@@ -114,7 +124,6 @@
 			</div>
 		</main>
 		<script type="text/javascript" src="../../public/js/jquery-1.12.4.min.js" ></script>
-		<script type="text/javascript" src="../../public/js/jquery.cookie.js" ></script>
 		<script type="text/javascript" src="../../public/js/index.js" ></script>
 	</body>
 </html>

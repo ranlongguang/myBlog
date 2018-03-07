@@ -1,6 +1,6 @@
 var express=require('express');
 var router=express.Router();
-var User=require("../modules/user");
+var User=require("../models/user");
 
 // 处理前端的注册请求
 router.post("/user/register",function(req,res){
@@ -49,15 +49,27 @@ router.post("/user/login",function(req,res){
 			});
 			return;
 		};
+		req.cookies.set("userInfo",JSON.stringify({
+			_id:userInfo._id,
+			username:userInfo.username
+		}));
 		res.json({
 			code:0,
 			message:"登录成功",
 			userInfo:{
 				_id:userInfo._id,
-				username:userInfo.username,
-				isAdmin:userInfo.isAdmin
+				username:userInfo.username
 			}
 		});
+	});
+});
+
+// 处理用户推出的功能
+router.get("/user/logout",function(req,res){
+	req.cookies.set("userInfo",null);
+	res.json({
+		code:0,
+		message:"退出成功"
 	});
 });
 

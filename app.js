@@ -12,8 +12,34 @@ var swig=require("swig");
 var mongoose=require("mongoose");
 // 加载body-parser模块
 var bodyParser=require("body-parser");
+// 加载cookies模块
+var Cookies=require("cookies");
+
+var User=require("./models/user");
+
 // 配置bodyparser模块处理前端的post请求
 app.use(bodyParser.urlencoded({extended:true}));
+
+// 设置cookie
+app.use(function(req,res,next){
+	req.cookies= new Cookies(req,res);
+	// 解析用户登录的cookie信息
+	req.userInfo={};
+	if(req.cookies.get("userInfo")){
+		try {
+			req.userInfo=JSON.parse(req.cookies.get("userInfo"));
+			// 获取当前登录用户的类型，是否是管理员
+			User.findById(req.userInfo._id).then(function(userInfo){
+				req.userInfo.isAdmin=Boolean(userInfo.isAdmin);
+				next();
+			});
+		}catch(e){
+			next();
+		}
+	}else {
+		next();
+	}
+});
 
 // 配置静态文件托管
 // 当用户访问的 url 是以 public 开头的，则直接返回对应__dirname+"/public"下的文件

@@ -1,6 +1,6 @@
 $(function(){
 	// 点击导航更换样式
-	var $nav=$("nav"),username="";
+	var $nav=$("nav");
 	$nav.on("click","a",function(){
 		$(this).addClass("navClick").siblings().removeClass("navClick");
 	});
@@ -24,11 +24,16 @@ $(function(){
 		}
 	});
 	
+	// 限制注册界面的用户名不能使用汉字
+	$("#registerUsername").keyup(function(){
+		this.value=this.value.replace(/[\u4E00-\u9FFF]/g,'');
+	});
+	
 	// 注册功能
 	$("#rejisterBtn").click(function(){
 		let $username=$("#registerUsername").val().trim(),
 			$password=$("#registerPassword").val().trim(),
-			$confirmpassword=$("#confirmPassword").val().trim();
+			$confirmpassword=$("#confirmPassword").val().trim();console.log($username);
 		// 判断检验用户的输入是否合法
 		if(!$username){
 			$(".colWarning").text("用户名不能为空！").show(400);
@@ -108,20 +113,14 @@ $(function(){
 		$.post("api/user/login",obj,function(result){
 			// 登录成功后
 			if(result.code==0){
-				// 设置cookie
-				$.cookie("userInfo",JSON.stringify(result.userInfo,{path:"/",expires:7}));
 				$(".colWarning").text(result.message).show(400);
 				setTimeout(function(){
 					$(".colWarning").hide(400);
-				},1500);
-				setTimeout(function(){
-					$("#loginBox").hide();
-					$("#loginSuccess").show(400);
 					// 清空输入框
 					$("#loginUsername").val("");
 					$("#loginPassword").val("");
 					window.location.reload();
-				},2500);
+				},1500);
 				return;
 			};
 			// 用户名不存在
@@ -141,23 +140,13 @@ $(function(){
 			};
 		});
 	});
-	// 如果是登录状态则显示用户信息，否则显示登录界面
-	if($.cookie("userInfo")){
-		username=JSON.parse($.cookie("userInfo")).username;
-		$("#_username").text(username);
-		// 判断是否是管理员登录
-		if(JSON.parse($.cookie("userInfo")).isAdmin){
-			$("#isAdmin").html(`<span class="colDanger">你好！你是管理员，<a href="/admin">你可以点击这里进入管理</a></span>`);
-		}
-		$("#loginSuccess").show();
-		$("#loginBox").hide();
-	}else{
-		$("#loginBox").show();
-	}
 	
 	// 退出登录功能
 	$("#logoutBtn").click(function(){
-		$.cookie("userInfo",{path:"/",expires:-1});
-		window.location.reload();
+		$.get("api/user/logout",function(result){
+			if(!result.code){
+				window.location.reload();
+			}
+		});
 	});
 });
