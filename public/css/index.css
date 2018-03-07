@@ -1,0 +1,219 @@
+/*公共样式*/
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+a {
+	text-decoration: none;
+}
+li {
+	list-style: none;
+}
+/*头部样式*/
+header {
+	width: 100%;
+	height: 250px;
+	position: relative;
+}
+header .backimg {
+	width: 100%;
+	height: 250px;
+}
+header .backimg img {
+	width: 100%;
+	height: 250px;
+}
+header .logo {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 170px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+}
+header .logo a {
+	-webkit-text-stroke: 1px red;
+	font-size: 40px;
+	background: linear-gradient(to right,yellow,green,hotpink);
+	border-radius: 8px;
+	color: transparent;
+	letter-spacing: 5px;
+	text-shadow: 5px 2px 15px black;
+	padding: 0 10px;
+}
+
+/*导航样式*/
+nav {
+	width: 100%;
+	height: 45px;
+}
+nav .menu {
+	width: 500px;
+	height: 45px;
+	margin: 0 auto;
+	line-height: 45px;
+	font-size: 12px;
+	display: flex;
+	justify-content: space-between;
+}
+nav .menu a{
+	color: #333333;
+	padding: 0px 5px;
+}
+.navClick {
+	border-bottom: 1px solid red;
+	color: red !important;
+	font-size: 16px;
+}
+
+/*内容区样式*/
+main {
+	background-color: #e7e7e7;
+	padding: 0px 20%;
+	font-size: 12px;
+	overflow: hidden;
+}
+/*左边样式*/
+main .mainLeft {
+	width: 63%;
+	float: left;
+	padding-bottom: 20px;
+}
+main .mainLeft .listBox {
+	width: 100%;
+	padding: 8px 20px;
+	background-color: #fefefe;
+	margin-top: 15px;
+}
+main .mainLeft .listBox h1 {
+	color: #3d3d3d;
+	margin: 10px 0px;
+	text-align: center;
+}
+main .mainLeft .listBox p{
+	font-size: 14px;
+	color: #3d3d3d;
+}
+main .mainLeft .listBox .colDefault {
+	text-align: center;
+	padding-bottom: 10px;
+	font-size: 12px;
+}
+main .mainLeft .listBox .colDefault .colInfo {
+	color: #559fac;
+}
+main .mainLeft .listBox .function {
+	width: 80px;
+	height: 30px;
+	border-radius: 5px;
+	background-color: #ea7818;
+	margin: 15px 0;
+}
+main .mainLeft .listBox .function a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	text-align: center;
+	line-height: 30px;
+}
+main .mainLeft .pager {
+	width: 100%;
+	height: 45px;
+	line-height: 45px;
+	margin-top: 15px;
+	background-color: #fefefe;
+}
+main .mainLeft .pager ul {
+	width: 100%;
+	height: 45px;
+	display: flex;
+	justify-content: space-around;
+	color: #3d3d3d;
+	padding: 0px 10px;
+}
+main .mainLeft .pager ul li {
+	width: 30%;
+}
+main .mainLeft .pager ul li:nth-child(2){
+	text-align: center;
+}
+main .mainLeft .pager ul li:nth-child(3){
+	text-align: right;
+}
+main .mainLeft .pager ul li a {
+	color: #3d3d3d;
+}
+
+/*右边样式*/
+main .mainRight {
+	width: 35%;
+	float: right;
+}
+main .mainRight .rightBox {
+	width: 100%;
+	padding: 8px 20px;
+	background-color: #fefefe;
+	margin-top: 15px;
+}
+main .mainRight .rightBox .title {
+	color: #3d3d3d;
+	border-bottom: 1px solid #e7e7e7;
+	font-size: 14px;
+	font-weight: 600;
+}
+main .mainRight .rightBox .title span {
+	border-bottom: 2px solid #e5a9a9;
+	display: inline-block;
+	padding: 5px 15px 5px 0;
+}
+main .mainRight .rightBox .colDanger {
+	color: hotpink;
+}
+main .mainRight .rightBox p{
+	margin: 10px 0;
+}
+main .mainRight .rightBox p a {
+	text-decoration: underline;
+}
+main .mainRight .rightBox .line {
+	margin-top: 10px;
+}
+main .mainRight .rightBox .line .colDark {
+	display: inline-block;
+	text-align: right;
+	width: 60px;
+}
+#loginBtn,#rejisterBtn {
+	width: 173px;
+	background-color: #e97b24;
+	color: #fff;
+	border: none;
+	outline: none;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 5px;
+}
+main .mainRight .rightBox .textRigth {
+	text-align: right;
+	padding-right: 25px;
+}
+main .mainRight .rightBox .textRigth a {
+	color: green;
+}
+main .mainRight .rightBox .textCenter {
+	text-align: center;
+	color: red;
+	font-size: 14px;
+	font-weight: 600;
+	display: none;
+	opacity: 0.6;
+}
+main .mainRight .rightBox .sh a{
+	color: red;
+}
