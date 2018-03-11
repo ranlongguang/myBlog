@@ -9,19 +9,16 @@
 		<!--头部-->
 		<header>
 			<div class="backimg"><img src="../../public/img/topbg.jpg" alt="背景图"/></div>
-			<div class="logo"><a href="index.html">RLG</a></div>
+			<div class="logo"><a href="/">RLG</a></div>
 		</header>
 		
 		<!--导航区-->
 		<nav>
 			<div class="menu">
-				<a href="javascript:void(0);" class="navClick">首页</a>
-				<a href="javascript:void(0);">HTML5</a>
-				<a href="javascript:void(0);">CSS</a>
-				<a href="javascript:void(0);">JAVASCRIPT</a>
-				<a href="javascript:void(0);">PHP</a>
-				<a href="javascript:void(0);">JAVA</a>
-				<a href="javascript:void(0);">Express</a>
+				<a href="/" class="navClick">首页</a>
+				{% for item in category %}
+				<a href="javascript:void(0);">{{item.name}}</a>
+				{% endfor %}
 			</div>
 		</nav>
 		

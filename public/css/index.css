@@ -61,9 +61,13 @@ nav .menu {
 	display: flex;
 	justify-content: space-between;
 }
-nav .menu a{
+nav .menu a {
 	color: #333333;
 	padding: 0px 5px;
+}
+nav .menu a:hover {
+	color: red;
+	border-bottom: 1px solid red;
 }
 .navClick {
 	border-bottom: 1px solid red;
