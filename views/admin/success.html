@@ -13,6 +13,9 @@
   <div class="panel-body">{{message}}</div>
   <div class="panel-footer">
   	<a href="{{url}}">点击这里跳转</a>
+  	{% if continueUrl %}
+  	<a href="{{continueUrl}}" style="margin-left: 100px;">{{continueContent}}</a>
+  	{% endif %}
   </div>
 </div>
 

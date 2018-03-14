@@ -242,7 +242,7 @@ router.get("/content",function(req,res){
 		page=Math.max(page,1);
 		var skip=(page-1)*limit; // 每页需要跳过的数据条数
 		
-		Content.find().sort({_id:-1}).limit(limit).skip(skip).then(function(contents){
+		Content.find().sort({_id:-1}).limit(limit).skip(skip).populate(["category","user"]).then(function(contents){
 			res.render("admin/content_index",{
 				userInfo:req.userInfo,
 				contents:contents,
@@ -289,17 +289,100 @@ router.post("/content/add",function(req,res){
 	new Content({
 		category:req.body.category,
 		title:req.body.title,
+		user:req.userInfo,
 		description:req.body.description,
-		content:req.body.content,
+		content:req.body.content
 	}).save().then(function(result){
 		res.render("admin/success",{
 			userInfo:req.userInfo,
 			message:"内容保存成功",
-			url:"/admin/content"
+			url:"/admin/content",
+			continueUrl:"/admin/content/add",
+			continueContent:"继续添加"
 		});
 	});
 	
 });
 
+// 修改内容
+router.get("/content/edit",function(req,res){
+	let id=req.query.id||"";
+	let categories=[];
+	Category.find().then(function(result){
+		categories=result;
+		return Content.findOne({
+			_id:id
+		}).populate("category");
+	}).then(function(content){
+			if(!content){
+				res.render("admin/error",{
+					userInfo:req.userInfo,
+					message:"访问的内容不存在"
+				});
+				return Promise.reject();
+			}else{
+				res.render("admin/content_edit",{
+					userInfo:req.userInfo,
+					content:content,
+					categories:categories
+				});
+			}
+		});
+});
+
+// 保存修改内容
+router.post("/content/edit",function(req,res){
+	let id=req.query.id||"";
+	if(req.body.category==""){
+		res.render("admin/err",{
+			userInfo:req.userInfo,
+			message:"内容的所属分类不能为空"
+		});
+		return;
+	};
+	if(req.body.title==""){
+		res.render("admin/err",{
+			userInfo:req.userInfo,
+			message:"内容的标题不能为空"
+		});
+		return;
+	};
+	// 更新数据
+	Content.update({
+		_id:id
+	},{
+		category:req.body.category,
+		title:req.body.title,
+		description:req.body.description,
+		content:req.body.content
+	}).then(function(){
+		res.render("admin/success",{
+			userInfo:req.userInfo,
+			message:"内容修改成功",
+			url:"/admin/content"
+		});
+	});
+});
+
+// 内容删除
+router.get("/content/delete",function(req,res){
+	let id=req.query.id;
+	if(!id){
+		res.render("admin/error",{
+			userInfo:req.userInfo,
+			message:"需要删除的内容不存在"
+		});
+	}else{
+		Content.remove({
+		_id:id
+		}).then(function(){
+			res.render("admin/success",{
+				userInfo:req.userInfo,
+				message:"内容删除成功",
+				url:"/admin/content"
+			});
+		});
+	}
+});
 
 module.exports=router;
