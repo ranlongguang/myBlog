@@ -249,7 +249,8 @@ router.get("/content",function(req,res){
 				page:page,
 				pageTotal:pageTotal,
 				count:count,
-				limit:limit
+				limit:limit,
+				pageUrl:"/admin/content"
 			});
 		});
 		
@@ -385,4 +386,12 @@ router.get("/content/delete",function(req,res){
 	}
 });
 
+// 处理后台管理员退出的功能
+router.get("/user/logout",function(req,res){
+	req.cookies.set("userInfo",null);
+	res.json({
+		code:0,
+		message:"退出成功"
+	});
+});
 module.exports=router;

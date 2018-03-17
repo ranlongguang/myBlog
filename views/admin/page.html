@@ -4,7 +4,7 @@
   	{% if page<=1 %}
     <li class="previous disabled"><a href="javascript:void(0);">没有上一页了</a></li>
     {% else %}
-    <li class="previous"><a href="/admin/user?page={{page-1}}"><span aria-hidden="true">&larr;</span>上一页</a></li>
+    <li class="previous"><a href="{{pageUrl}}?page={{page-1}}"><span aria-hidden="true">&larr;</span>上一页</a></li>
     {% endif %}
     
     <li>一共有 {{count}} 条数据，每页显示 {{limit}} 条数据，一共 {{pageTotal}} 页，当前第 {{page}} 页</li>
@@ -12,7 +12,7 @@
     {% if page>=pageTotal %}
     <li class="next disabled"><a href="javascript:void(0);">没有下一页了 </a></li>
     {% else %}
-    <li class="next"><a href="/admin/user?page={{page+1}}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+    <li class="next"><a href="{{pageUrl}}?page={{page+1}}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
     {% endif %}
   </ul>
 </nav>

@@ -1,9 +1,4 @@
 $(function(){
-	// 点击导航更换样式
-	var $nav=$("nav");
-	$nav.on("click","a",function(){
-		$(this).addClass("navClick").siblings().removeClass("navClick");
-	});
 	// 切换登录和注册功能
 	$(".colMint").click(function(){
 		if($(this).text()=="马上注册"){

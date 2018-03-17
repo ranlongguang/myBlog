@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block content %}
+	
+	<div class="listBox">
+		<h1>{{content.title}}</h1>
+		<p class="colDefault">
+			作者： <span class="colInfo">{{content.user.username}}</span> -
+			时间： <span class="colInfo">{{content.addTime.toString()|date("Y年m月d日 H:i:s",-8*60)}}</span> -
+			阅读： <span class="colInfo">{{content.views}}</span> -
+			评论： <span class="colInfo" id="commentsnum"></span>
+		</p>
+		<dfn>
+			{{content.content}}
+		</dfn>
+	</div>
+	
+	<div class="listBox">
+		<h3 class="textLeft">
+			<strong>评论</strong><span class="em">一共有&nbsp;<em id="messageCount">0</em>&nbsp;&nbsp;条评论</span>
+		</h3>
+		{% if userInfo.username %}
+		<p class="textLeft">{{userInfo.username}}</p>
+		<p class="textLeft">
+			<input type="text" id="messageContent" placeholder="输入你的评论" /><button id="messageBtn" class="submit">提交</button>
+		</p>
+		{% else %}
+		<p class="bgDanger">你还没有登录，请先登录！</p>
+		{% endif %}
+	
+		<!--存放评论的盒子-->
+		<div class="messageList">
+			
+		</div>
+	</div>
+	
+	<div class="pager" style="position: inherit;margin-top: 20px;">
+	  <ul>
+	    <li class="previous"></li>
+	   
+	    <li></li>
+	    
+	    <li class="next"></li>
+	   
+	  </ul>
+	</div>
+	
+	<!--隐藏域用于携带文章内容的唯一标识即contentid-->
+	<input type="hidden" id="contentid" value="{{content.id}}" />
+	
+	<script type="text/javascript" src="../../public/js/jquery-1.12.4.min.js" ></script>
+	<script type="text/javascript" src="../../public/js/comments.js" ></script>
+{% endblock %}

@@ -1,5 +1,6 @@
 /*
  * 项目开始时间：2018/3/3
+ * 项目结束时间：2018/3/16
  * */
 // 应用程序的启动(入口)文件；
 // 加载express模块
@@ -73,10 +74,6 @@ app.use('/',require('./routers/index'));
 	 * */
 	/*res.render("index");
 });*/
-
-
-
-
 
 // 监听http请求
 mongoose.connect("mongodb://localhost:27017/Blog",function(err){

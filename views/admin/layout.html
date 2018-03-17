@@ -20,7 +20,7 @@
 		        <li class="dropdown">
 		          <a href="/admin/category" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类管理 <span class="caret"></span></a>
 		          <ul class="dropdown-menu">
-		            <li><a href="/admin/category">管理首页</a></li>
+		            <li><a href="/admin/category">分类首页</a></li>
 		            <li><a href="/admin/category/add">添加分类</a></li>
 		          </ul>
 		        </li>
@@ -34,9 +34,9 @@
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{userInfo.username}}<span class="caret"></span></a>
+		          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{userInfo.username}}<span class="caret"></span></a>
 		          <ul class="dropdown-menu">
-		            <li><a href="#">退出</a></li>
+		            <li><a href="javascript:void(0);" id="adminLogout">退出</a></li>
 		          </ul>
 		        </li>
 		      </ul>
@@ -52,5 +52,17 @@
 		</div>
 		<script type="text/javascript" src="../../public/js/jquery-1.12.4.min.js" ></script>
 		<script type="text/javascript" src="../../public/js/bootstrap.min.js" ></script>
+		<script>
+			$(function(){
+				// 退出登录功能
+				$("#adminLogout").click(function(){
+					$.get("/admin/user/logout",function(result){
+						if(!result.code){
+							window.location="/";
+						}
+					});
+				});
+			})
+		</script>
 	</body>
 </html>

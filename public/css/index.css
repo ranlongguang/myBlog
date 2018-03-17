@@ -86,7 +86,9 @@ main {
 main .mainLeft {
 	width: 63%;
 	float: left;
-	padding-bottom: 20px;
+	padding-bottom: 70px;
+	position: relative;
+	min-height: 34.5vw;
 }
 main .mainLeft .listBox {
 	width: 100%;
@@ -102,11 +104,13 @@ main .mainLeft .listBox h1 {
 main .mainLeft .listBox p{
 	font-size: 14px;
 	color: #3d3d3d;
+	font-weight: 600;
+	margin: 10px 0;
 }
 main .mainLeft .listBox .colDefault {
 	text-align: center;
-	padding-bottom: 10px;
 	font-size: 12px;
+	font-weight: normal;
 }
 main .mainLeft .listBox .colDefault .colInfo {
 	color: #559fac;
@@ -132,6 +136,8 @@ main .mainLeft .pager {
 	line-height: 45px;
 	margin-top: 15px;
 	background-color: #fefefe;
+	position: absolute;
+	bottom: 10px;
 }
 main .mainLeft .pager ul {
 	width: 100%;
@@ -151,7 +157,7 @@ main .mainLeft .pager ul li:nth-child(3){
 	text-align: right;
 }
 main .mainLeft .pager ul li a {
-	color: #3d3d3d;
+	color: #000;
 }
 
 /*右边样式*/
@@ -177,7 +183,7 @@ main .mainRight .rightBox .title span {
 	padding: 5px 15px 5px 0;
 }
 main .mainRight .rightBox .colDanger {
-	color: hotpink;
+	color: red;
 }
 main .mainRight .rightBox p{
 	margin: 10px 0;
@@ -220,4 +226,60 @@ main .mainRight .rightBox .textCenter {
 }
 main .mainRight .rightBox .sh a{
 	color: red;
+}
+
+/*评论区样式*/
+.listBox .textLeft{
+	margin-top: 10px;
+	font-size: 12px;
+}
+.listBox h3.textLeft{
+	overflow: hidden;
+}
+.listBox h3.textLeft strong {
+	float: left;
+}
+.listBox h3.textLeft span {
+	float: right;
+}
+.listBox .textLeft:nth-child(3) {
+	height: 43px;
+	border: 1px solid cornflowerblue;
+}
+#messageContent {
+	height: 40px;
+	width: 88%;
+	padding-left: 20px;
+	border: none;
+	outline: none;
+}
+#messageBtn {
+	height: 40.9px;
+	width: 12%;
+	border: none;
+	color: white;
+	background-color: cornflowerblue;
+}
+.listBox .bgDanger {
+	height: 30px;
+	line-height: 30px;
+	background-color: red;
+	color: white !important;
+	text-align: center;
+}
+.messageBox {
+	margin: 45px 0;
+}
+.messageBox .name {
+	overflow: hidden;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #e7e7e7;
+}
+.messageBox .name .fl {
+	float: left;
+	color: orangered;
+}
+.messageBox .name .fr {
+	float: right;
+	color: green;
 }
