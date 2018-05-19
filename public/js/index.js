@@ -84,7 +84,8 @@ $(function(){
 	// 登录功能
 	$("#loginBtn").click(function(){
 		let $username=$("#loginUsername").val().trim(),
-			$password=$("#loginPassword").val().trim();
+			$password=$("#loginPassword").val().trim(),
+			$verification=$("#verification").val().trim();
 		// 判断检验用户的输入是否合法
 		if(!$username){
 			$(".colWarning").text("请输入用户名").show(400);
@@ -100,6 +101,24 @@ $(function(){
 			},1500);
 			return;
 		};
+		
+		// 输入验证码
+		if($verification){
+			if($verification!=yan){
+				$(".colWarning").text("验证码错误，请重输入正确的验证码！").show(400);
+				setTimeout(function(){
+					$(".colWarning").hide(400);
+				},1500);
+				return;
+			}
+		}else{
+			$(".colWarning").text("请输入验证码").show(400);
+			setTimeout(function(){
+				$(".colWarning").hide(400);
+			},1500);
+			return;
+		}
+		
 		// 发送登录的请求
 		let obj={
 			_username:$username,
@@ -136,6 +155,20 @@ $(function(){
 		});
 	});
 	
+	//验证码
+	var yan;
+	function verification(){
+		yan=Math.ceil(Math.random()*9999);
+		if(yan<1000){
+			yan=8888;
+		}
+		return yan;
+	}
+	$("#yanzheng").html(verification());
+	$("#yanzheng").click(function(){
+		$(this).html(verification());
+	});
+	
 	// 退出登录功能
 	$("#logoutBtn").click(function(){
 		$.get("api/user/logout",function(result){
@@ -144,4 +177,54 @@ $(function(){
 			}
 		});
 	});
+	
+	var t=new TimelineMax();
+	t.set(".logo",{y:-250})
+	t.to(".logo",3,{
+		y:0,
+		ease:"Bounce.easeInOut"
+	},1);
+	t.to(".logo",2,{
+		scale:0.5
+	},4);
+	
+	// 换肤
+	var pfbox=[
+		{id:"0",url:"../../public/img/topbg.jpg"},
+		{id:"1",url:"../../public/img/xia.jpg"},
+		{id:"2",url:"../../public/img/qiu.jpg"},
+		{id:"3",url:"../../public/img/dong.jpg"}
+	],pf_url="";
+	// 检测用户是否有设置过皮肤
+	if($.cookie("mypf")){
+		pf_url=JSON.parse($.cookie("mypf")).url;
+		$(".backimg").find("img").attr("src",pf_url);
+		$(".pf_item").eq(JSON.parse($.cookie("mypf")).id).addClass("pf_active").siblings().removeClass("pf_active");
+	}else{
+		pf_url=pfbox[0].url;
+		$(".backimg").find("img").attr("src",pf_url);
+	}
+	// 点击展开换皮肤选项
+	$("#hf-btn").click(function(){
+		if($(this).text()==="查看皮肤"){
+			$(this).text("收起皮肤");
+			$(".hf-icon").show();
+			$(".pf_box").show(200);
+		}else{
+			$(this).text("查看皮肤");
+			$(".hf-icon").hide();
+			$(".pf_box").hide();
+		}
+	});
+	// 点击更换皮肤
+	$(".pf_box").on("click",".pf_item",function(){
+		pf_url=pfbox[$(this).data().idx].url;
+		$(".backimg").find("img").attr("src",pf_url);
+		$.cookie("mypf",JSON.stringify(pfbox[$(this).data().idx],{path:"/",expires:15}));
+		$(".hf-icon").hide();
+		$(".pf_box").hide();
+		$("#hf-btn").text("查看皮肤");
+		$(".pf_item").eq($(this).data().idx).addClass("pf_active").siblings().removeClass("pf_active");
+	});
+	
 });

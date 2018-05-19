@@ -8,7 +8,7 @@
 	<body>
 		<!--头部-->
 		<header>
-			<div class="backimg"><img src="../../public/img/topbg.jpg" alt="背景图"/></div>
+			<div class="backimg"><img src="" alt="背景图"/></div>
 			<div class="logo"><a href="/">RLG</a></div>
 		</header>
 		
@@ -63,6 +63,11 @@
 					<div class="title"><span>登录</span></div>
 					<div class="line"><span class="colDark">用户名：</span><input type="text" id="loginUsername" /><em></em></div>
 					<div class="line"><span class="colDark">密码：</span><input type="password" id="loginPassword" /><em></em></div>
+					<div class="line">
+						<span class="colDark">验证码：</span>
+						<input type="text" id="verification" style="width: 97px;" />
+						<a href="javascript:void(0);" id="yanzheng" style="width: 70px;line-height: 19px;height: 19px;text-align: center;letter-spacing: 3px;background-color: #101010;color: #fff;display: block;float: right;margin-right: 24px;"></a>
+					</div>
 					<div class="line"><span class="colDark"></span><button id="loginBtn">登 录</button></div>
 					<p class="textRigth">还没注册？<a href="javascript:void(0);" class="colMint">马上注册</a></p>
 					<p class="colWarning textCenter"></p>
@@ -89,7 +94,19 @@
 				</div>
 			</div>
 		</main>
+		
+		<!--网站换肤-->
+		<a href="javascript:void(0);" id="hf-btn">查看皮肤</a>
+		<span class="hf-icon"></span>
+		<ul class="pf_box">
+			<li class="pf_item pf_active" data-idx = "0">春</li>
+			<li class="pf_item" data-idx = "1">夏</li>
+			<li class="pf_item" data-idx = "2">秋</li>
+			<li class="pf_item" data-idx = "3">冬</li>
+		</ul>
 		<script type="text/javascript" src="../../public/js/jquery-1.12.4.min.js" ></script>
 		<script type="text/javascript" src="../../public/js/index.js" ></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
 	</body>
 </html>
